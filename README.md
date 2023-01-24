@@ -1,2 +1,2 @@
-# roybot-a-discord-bot
+# RoyBot, a Discord bot
 Malin's Discord bot
