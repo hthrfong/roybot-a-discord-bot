@@ -2,9 +2,12 @@ import discord
 import asyncio
 from glob import glob
 from discord.ext.commands import Bot as BotBase
+import os
+from dotenv import load_dotenv
 
 OWNER_IDS = [268862253326008322, 166790627856613376]
 COGS = [path.split("/")[-1][:-3] for path in glob("./lib/cogs/*.py")]
+load_dotenv()
 
 
 class Ready(object):
@@ -41,9 +44,7 @@ class Bot(BotBase):
         print("running setup...")
         self.setup()
 
-        with open("./lib/bot/.env", "r", encoding="utf-8") as tf:
-            keys = tf.readlines()
-        self.TOKEN = keys[0].rstrip('\n')
+        self.TOKEN = os.getenv("DISCORD_TOKEN")
         
         print("running bot...")
         super().run(self.TOKEN, reconnect=True)
